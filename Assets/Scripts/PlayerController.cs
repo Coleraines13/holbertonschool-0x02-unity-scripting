@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
@@ -24,6 +25,11 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             Debug.Log($"Health: {health}");
+        }
+
+        if(other.tag == "Goal")
+        {
+            Debug.Log("You win!");
         }
     }
 
@@ -49,6 +55,16 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey("d") || Input.GetKey("right"))
         {
             rb.AddForce(speed * Time.deltaTime,0,0);
+        }
+    }
+    
+
+    void Update()
+    {
+        if(health == 0)
+        {
+        Debug.Log("Game Over!");
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
     }
 }
